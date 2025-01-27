@@ -1,6 +1,9 @@
-import { Redirect } from 'expo-router';
+import { View, Text } from 'react-native';
 
 export default function Index() {
-  // Kullanıcıyı (auth) grubundaki login sayfasına yönlendir
-  return <Redirect href="/(auth)/loginn" />;
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Hello</Text>
+    </View>
+  );
 } 
