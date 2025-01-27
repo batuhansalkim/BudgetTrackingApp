@@ -1,3 +1,47 @@
+# Akıllı Bütçe Takip ve Harcama Analizi Uygulaması
+
+## Proje Kurulumu ve İlerleme
+
+### 1. Temel Yapı Oluşturma (✓)
+- Proje temizlendi ve basit yapıya indirgendi
+- Temel klasör yapısı oluşturuldu:
+  - app/(auth): Kimlik doğrulama ekranları
+  - app/components: Yeniden kullanılabilir bileşenler
+  - app/constants: Sabit değerler
+  - app/hooks: Custom React hooks
+  - app/navigation: Navigasyon yapılandırması
+  - app/screens: Uygulama ekranları
+  - app/utils: Yardımcı fonksiyonlar
+  - app/assets: Medya dosyaları
+
+### 2. Paket Kurulumları ve Açıklamaları (✓)
+
+#### Navigasyon Paketleri
+- **@react-navigation/native**: React Native'de sayfa geçişleri için temel navigasyon paketi
+- **@react-navigation/stack**: Tam ekran sayfa geçişleri için (Splash, Login, Register ekranları)
+- **@react-navigation/bottom-tabs**: Alt tab menüsü için (Ana sayfa, İşlemler, Analiz, Hedefler, Profil)
+
+#### UI ve Animasyon Paketleri
+- **react-native-reanimated**: Gelişmiş animasyonlar için (Onboarding animasyonları, geçiş efektleri)
+- **react-native-gesture-handler**: Dokunma ve hareket işlemleri için (Kaydırma, sürükleme)
+
+#### Güvenlik ve Layout Paketleri
+- **react-native-safe-area-context**: Güvenli alan yönetimi (Çentik, home bar gibi alanları yönetmek için)
+- **react-native-screens**: Ekran yönetimi optimizasyonu
+
+#### Veri Saklama
+- **@react-native-async-storage/async-storage**: Yerel depolama için (Kullanıcı tercihleri, token saklama)
+
+## Sonraki Adımlar
+- [ ] Splash Screen oluşturma
+- [ ] Onboarding ekranları
+- [ ] Giriş/Kayıt akışı
+
+## Teknoloji Yığını
+- React Native
+- Expo
+- TypeScript
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
