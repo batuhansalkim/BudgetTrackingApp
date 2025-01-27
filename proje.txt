@@ -1,0 +1,211 @@
+- *Kullanıcı Karşılaştırması:* Anonim olarak benzer gelir grubundaki kullanıcılarla karşılaştırma.
+- *Tasarruf Yarışmaları:* Kullanıcıların tasarruf hedeflerine ulaşmak için yarışabileceği platformlar.
+- *Ortak Bütçe Yönetimi:* Aile üyeleri veya arkadaşlarla birlikte bütçe oluşturma.
+
+### 5. *Akıllı OCR Entegrasyonu*
+- *Fiş Taraması:* Fişleri tarayarak giderlerin otomatik olarak eklenmesi.
+- *E-Fatura Entegrasyonu:* E-faturalardan giderlerin otomatik olarak alınması.
+- *Garanti Süresi Takibi:* Satın alınan ürünlerin garanti sürelerinin izlenmesi.
+
+### 6. *Finansal Eğitim Gamification*
+- *Eğitici Mini Oyunlar:* Finansal becerileri geliştiren oyunlar.
+- *Rozet ve Ödül Sistemi:* Tasarruf hedeflerine ulaşıldığında ödül kazanımı.
+- *Interaktif Eğitim Modülleri:* Kullanıcıların finansal bilgi düzeylerini artıran modüller.
+
+### 7. *Gelişmiş Analitik ve Tahminleme*
+- *Mevsimsel Harcama Analizi:* Belirli dönemlerdeki harcamaların karşılaştırılması.
+- *"What-if" Analizleri:* Alternatif senaryoların oluşturulması.
+- *Yatırım Fırsatları Önerileri:* Kullanıcının tasarruflarını değerlendirebileceği yatırım önerileri.
+
+### 8. *Yerel Entegrasyonlar*
+- *Türkiye'deki Bankalarla Entegrasyon:* Banka API'leri aracılığıyla otomatik işlem takibi.
+- *E-Devlet Entegrasyonu:* Vergi ve diğer yasal işlemler için hatırlatıcılar.
+- *Fatura Ödeme Sistemleri:* Yerel fatura ödeme hizmetleriyle entegrasyon.
+
+### 9. *Akıllı Bütçe Optimizasyonu*
+- *Otomatik Bütçe Önerileri:* Yapay zeka tarafından önerilen bütçe planları.
+- *Dinamik Kategori Ayarlaması:* Kullanıcının değişen ihtiyaçlarına göre ayarlanan kategoriler.
+- *Yedek Fon Önerileri:* Beklenmeyen giderler için tasarruf önerileri.
+
+### 10. *Yaşam Tarzı Entegrasyonu*
+- *Sağlık Uygulamaları ile Entegrasyon:* Yemek siparişleri ve market alışverişlerini takip ederek bütçeyi optimize etme.
+- *Takvim Entegrasyonu:* Gelecek harcamaların planlanması için etkinlik takvimi ile entegrasyon.
+- *Konum Bazlı Öneriler:* Kullanıcının bulunduğu konuma göre tasarruf önerileri.
+
+---
+
+## Rakiplerden Farklılıklar
+
+### Daha Akıllı
+- Yapay zeka ile kişiselleştirilmiş öneriler.
+- Gerçek zamanlı finansal sağlık skoru.
+
+### Daha Sosyal
+- Topluluk özellikleri ile kullanıcı bağlılığını artırma.
+- Ortak bütçe yönetimi ve tasarruf yarışmaları.
+
+### Daha Yerel
+- Türkiye'ye özel bankacılık entegrasyonları ve e-devlet destekleri.
+
+### Daha Eğitici
+- Gamification ile finansal eğitim.
+
+### Daha Bütünleşik
+- Sağlık uygulamaları ve takvim gibi yaşam tarzı entegrasyonları.
+
+---
+
+## Teknoloji Yığını (Tech Stack)
+- *Frontend:* React Native
+- *Backend:* Node.js
+- *Veritabanı:* MongoDB
+- *Yapay Zeka:* TensorFlow.js / Python (ML modelleri için)
+- *API Entegrasyonu:* Türkiye bankaları ve e-devlet API'leri
+- *Diğer:* Firebase (push bildirimler), Redux (durum yönetimi)
+
+---
+
+Bu döküman, uygulamanızın kapsamını, özelliklerini ve rekabet avantajlarını net bir şekilde ortaya koymaktadır. 
+
+
+-- YAPIM AŞAMASI --
+
+1. Başlangıç Ekranları (Onboarding Flow)
+Splash Screen
+Uygulama logosu ve animasyon
+Giriş durumu kontrolü
+Onboarding Screens (3-4 ekran)
+Hoş Geldin Ekranı
+Ana değer önerisi
+Görsel animasyonlar
+Özellik Tanıtımı-1
+AI destekli bütçe yönetimi
+Görsel örnekler
+Özellik Tanıtımı-2
+Sosyal özellikler ve gamification
+İnteraktif demo
+Başlangıç Ekranı
+Giriş/Kayıt seçenekleri
+Kimlik Doğrulama Ekranları
+Giriş Ekranı
+Kayıt Ekranı
+Şifre Sıfırlama
+SMS/Email Doğrulama
+İlk Kullanım Kurulumu
+Profil Oluşturma
+Temel bilgiler
+Gelir bilgisi
+Harcama kategorileri seçimi
+Bütçe Hedefleri
+Aylık bütçe belirleme
+Kategori bazlı limitler
+Banka Entegrasyonu
+Banka hesapları bağlama
+Manuel/Otomatik seçimi
+2. Ana Uygulama Yapısı (Tab Navigator)
+1. Ana Sayfa (Dashboard)
+Finansal özet kartı
+Hızlı işlem butonları
+Son işlemler listesi
+Bütçe durum göstergeleri
+Yaklaşan ödemeler
+AI önerileri widget'ı
+2. İşlemler
+Gelir/Gider ekleme FAB
+Filtrelenebilir işlem listesi
+Kategori bazlı görünüm
+Arama ve filtreleme
+OCR ile fiş tarama
+Sesli komut ile işlem ekleme
+3. Analiz
+Grafiksel analizler
+Harcama trendleri
+Kategori dağılımları
+Tahmin grafikleri
+Karşılaştırmalı analizler
+Finansal sağlık skoru
+4. Hedefler
+Tasarruf hedefleri
+İlerleme göstergeleri
+Hedef detay sayfası
+Yeni hedef oluşturma
+Hedef önerileri
+Başarı rozetleri
+5. Profil
+Kullanıcı bilgileri
+Hesap ayarları
+Banka bağlantıları
+Bildirim tercihleri
+Uygulama ayarları
+Yardım merkezi
+3. Özel Sayfalar (Stack Navigator)
+Bütçe Planlama
+Aylık bütçe ayarları
+Kategori limitleri
+Otomatik tasarruf planları
+Bütçe önerileri
+Sosyal Özellikler
+Aile/Grup bütçesi
+Tasarruf yarışmaları
+Topluluk önerileri
+Anonim karşılaştırmalar
+Eğitim Merkezi
+Finansal eğitim modülleri
+Mini oyunlar
+Başarı rozetleri
+İlerleme takibi
+Fatura Yönetimi
+Fatura takvimi
+Otomatik ödeme ayarları
+E-fatura entegrasyonu
+Fatura hatırlatıcıları
+Yatırım Takibi
+Yatırım portföyü
+Piyasa verileri
+Yatırım önerileri
+Risk analizi
+4. Modal Ekranlar
+Hızlı İşlemler
+Hızlı gelir/gider ekleme
+Fiş tarama
+Sesli komut
+QR kod okuma
+Bildirimler
+İşlem bildirimleri
+Bütçe uyarıları
+Hedef hatırlatmaları
+Özel teklifler
+Ayarlar Modalleri
+Kategori düzenleme
+Hedef güncelleme
+Filtre ayarları
+Tema seçimi
+Navigasyon Yapısı: Root Navigator
+├── Auth Stack
+│   ├── Splash
+│   ├── Onboarding
+│   ├── Login/Register
+│   └── Initial Setup
+│
+├── Main Tab Navigator
+│   ├── Dashboard
+│   ├── Transactions
+│   ├── Analysis
+│   ├── Goals
+│   └── Profile
+│
+└── Feature Stack Navigator
+    ├── Budget Planning
+    ├── Social Features
+    ├── Education Center
+    ├── Bill Management
+    └── Investment Tracking Bu yapı için önerilen teknolojiler:
+React Navigation 6
+Redux/Context API (state management)
+React Native Reanimated (animasyonlar)
+React Native Charts (grafikler)
+React Native Vision Camera (OCR)
+React Native Voice (sesli komutlar)
+
+
+

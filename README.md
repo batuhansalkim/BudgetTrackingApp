@@ -32,10 +32,44 @@
 #### Veri Saklama
 - **@react-native-async-storage/async-storage**: Yerel depolama için (Kullanıcı tercihleri, token saklama)
 
+### 3. Font Implementasyonu (✓)
+- Inter font ailesi eklendi
+- Font dosyaları assets/fonts klasörüne yerleştirildi
+- useFonts hook'u oluşturuldu
+- expo-font paketi kuruldu
+
+### 4. Splash Screen Implementasyonu (✓)
+- Animasyonlu logo ve başlık tasarımı
+- Font yükleme entegrasyonu
+- 2.5 saniyelik bekleme süresi
+- Gradient arka plan
+- Yumuşak geçiş animasyonları (scale, opacity, translateY)
+- Gölge efektleri
+- Onboarding yönlendirmesi
+
+### 5. Onboarding Ekranları (✓)
+- 3 adet tanıtım ekranı
+- Kaydırmalı sayfa yapısı
+- İnteraktif sayfa göstergeleri
+- Animasyonlu geçişler ve ölçeklendirme efektleri
+- Her sayfa için özel:
+  - Gradient arka planlar
+  - SVG desenler (daireler, noktalar, dalgalar)
+  - İçerik animasyonları
+- Modern tasarımlı ilerleme butonu
+- Login sayfasına yönlendirme
+
+### 6. Login Sayfası (✓)
+- Form tasarımı ve validasyonu
+- E-posta ve şifre alanları
+- Hata mesajları
+- Kayıt sayfasına yönlendirme
+- Ana sayfaya yönlendirme (TODO)
+
 ## Sonraki Adımlar
-- [ ] Splash Screen oluşturma
-- [ ] Onboarding ekranları
-- [ ] Giriş/Kayıt akışı
+- [ ] Register (Kayıt) sayfası oluşturma
+- [ ] Tab navigasyonu kurulumu
+- [ ] Ana sayfa tasarımı
 
 ## Teknoloji Yığını
 - React Native
