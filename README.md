@@ -159,22 +159,56 @@
 - Biyometrik kimlik doğrulama
 - Yardım ve destek bölümü
 
+### 19. İşlem Detay Ekranı (✓)
+- Detaylı işlem bilgileri görünümü
+- İşlem düzenleme ve silme seçenekleri
+- Kategori detayları ve istatistikler
+- Not ve ek dosya yönetimi
+- Benzer işlemler listesi
+- Paylaşım seçenekleri
+- Modern gradient başlık tasarımı
+- İnteraktif aksiyon butonları
+
+### 20. Kategori Yönetim Ekranı (✓)
+- Kategori listesi görünümü
+- Yeni kategori ekleme formu
+- Kategori düzenleme özellikleri
+- Özel ikon ve renk seçimi
+- Kategori bazlı bütçe limitleri
+- Kategori bazlı istatistikler
+- Sürükle-bırak liste düzeni
+- Modal form tasarımı
+
+### 21. Gelişmiş Arama ve Filtreleme (✓)
+- Çoklu filtre seçenekleri
+- Tarih aralığı seçimi
+- Tutar aralığı belirleme
+- Kategori bazlı filtreleme
+- Kayıtlı filtre yönetimi
+- Detaylı arama sonuç görünümü
+- Filtre kaydetme özelliği
+- İnteraktif filtre çipleri
+
 ## Devam Eden Geliştirmeler
-1. Veri Yönetimi
-   - Yerel depolama entegrasyonu
-   - Veri senkronizasyonu
-   - Yedekleme sistemi
+1. Veri Yönetimi ve Entegrasyon
+   - Firebase Authentication entegrasyonu
+   - Firestore veritabanı yapılandırması
+   - Offline veri senkronizasyonu
+   - Veri yedekleme sistemi
 
 2. Performans İyileştirmeleri
-   - Lazy loading
+   - Lazy loading implementasyonu
    - Önbellek yönetimi
-   - Optimizasyon
+   - Liste optimizasyonları
+   - Görsel asset optimizasyonları
 
-3. Ek Özellikler
-   - Bütçe planlama
-   - Hatırlatıcılar
-   - Raporlama sistemi
+3. Ek Özellikler ve Geliştirmeler
+   - Bütçe planlama sistemi
+   - Otomatik kategorizasyon
+   - Akıllı hatırlatıcılar
    - Döviz çevirici
+   - PDF rapor oluşturma
+   - Veri analizi ve tahminleme
 
 # Welcome to your Expo app 👋
 
