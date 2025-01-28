@@ -64,17 +64,117 @@
 - E-posta ve şifre alanları
 - Hata mesajları
 - Kayıt sayfasına yönlendirme
-- Ana sayfaya yönlendirme (TODO)
+- Google ile giriş seçeneği
+- Modern gradient tasarım
+- Klavye dostu arayüz
 
-## Sonraki Adımlar
-- [ ] Register (Kayıt) sayfası oluşturma
-- [ ] Tab navigasyonu kurulumu
-- [ ] Ana sayfa tasarımı
+### 7. Register (Kayıt) Sayfası (✓)
+- Form tasarımı ve validasyonu
+- Ad Soyad, E-posta ve şifre alanları
+- Şifre tekrarı kontrolü
+- Hata mesajları
+- Login sayfasına yönlendirme
+- Modern gradient tasarım
+- Klavye dostu arayüz
 
-## Teknoloji Yığını
-- React Native
-- Expo
-- TypeScript
+### 8. Tab Navigasyonu (✓)
+- 5 ana sekme için temel yapı
+- Modern ve kullanıcı dostu tasarım
+- Özelleştirilmiş ikonlar
+- Gradient renkler ve gölgeler
+
+### 9. Ana Sayfa (Dashboard) (✓)
+- Toplam bakiye kartı
+- Gelir/Gider özeti
+- Hızlı işlem butonları
+- Son işlemler listesi
+- Aylık analiz özeti
+- Modern kart tasarımları
+
+### 10. İşlemler Sayfası (✓)
+- Filtreleme seçenekleri
+- İşlem kategorileri
+- Hızlı filtre çipleri
+- Yeni işlem ekleme butonu
+- Liste görünümü hazırlığı
+
+### 11. Analiz Sayfası (✓)
+- Genel bakış kartı
+- Kategori analizi bölümü
+- Günlük harcama grafiği
+- Harcama alışkanlıkları
+- Tarih filtresi
+
+### 12. Hedefler Sayfası (✓)
+- Aktif hedefler listesi
+- İlerleme çubukları
+- Hedef detay kartları
+- Tamamlanan hedefler
+- Yeni hedef ekleme butonu
+
+### 13. Profil Sayfası (✓)
+- Kullanıcı bilgileri
+- Profil fotoğrafı
+- Ayarlar menüsü
+- Tema seçenekleri
+- Çıkış yapma butonu
+
+### 14. İşlem Formu ve Modal Yapısı (✓)
+- Modern ve kullanıcı dostu form tasarımı
+- Gelir/Gider seçimi
+- Kategori seçimi
+- Tarih seçici entegrasyonu
+- Miktar ve açıklama alanları
+- Form validasyonları
+- Modal animasyonları
+
+### 15. Bildirim Sistemi (✓)
+- İşlem sonrası anlık bildirimler
+- Otomatik kapanan bildirimler (3 saniye)
+- Özelleştirilebilir bildirim mesajları
+- Modern bildirim tasarımı
+- Animasyonlu geçişler
+
+### 16. Grafik Sistemi (✓)
+- Harcama dağılımı pasta grafiği
+- Aylık harcama trendi çizgi grafiği
+- Kategori karşılaştırma çubuk grafiği
+- İnteraktif grafik bileşenleri
+- Özelleştirilebilir grafik stilleri
+- Responsive tasarım
+
+### 17. Hedef Takip Sistemi (✓)
+- Hedef ekleme/düzenleme formu
+- İlerleme çubukları
+- Hedef kategorileri ve ikonları
+- Tarih bazlı hedef takibi
+- Hedef detay görünümü
+- İlerleme yüzdesi hesaplama
+
+### 18. Ayarlar ve Profil Yönetimi (✓)
+- Profil bilgileri düzenleme
+- Bildirim tercihleri
+- Tema ve görünüm ayarları
+- Güvenlik ayarları
+- Biyometrik kimlik doğrulama
+- Yardım ve destek bölümü
+
+## Devam Eden Geliştirmeler
+1. Veri Yönetimi
+   - Yerel depolama entegrasyonu
+   - Veri senkronizasyonu
+   - Yedekleme sistemi
+
+2. Performans İyileştirmeleri
+   - Lazy loading
+   - Önbellek yönetimi
+   - Optimizasyon
+
+3. Ek Özellikler
+   - Bütçe planlama
+   - Hatırlatıcılar
+   - Raporlama sistemi
+   - Döviz çevirici
 
 # Welcome to your Expo app 👋
 
@@ -85,7 +185,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 1. Install dependencies
 
    ```bash
-   npm install
+npm install
    ```
 
 2. Start the app

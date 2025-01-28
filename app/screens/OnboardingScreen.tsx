@@ -181,9 +181,9 @@ export default function OnboardingScreen() {
                 {ONBOARDING_DATA.map((_, i) => {
                     const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
 
-                    const width = scrollX.interpolate({
+                    const scale = scrollX.interpolate({
                         inputRange,
-                        outputRange: [8, 20, 8],
+                        outputRange: [0.8, 1.4, 0.8],
                         extrapolate: 'clamp',
                     });
 
@@ -193,20 +193,14 @@ export default function OnboardingScreen() {
                         extrapolate: 'clamp',
                     });
 
-                    const backgroundColor = scrollX.interpolate({
-                        inputRange,
-                        outputRange: ['rgba(255,255,255,0.4)', '#fff', 'rgba(255,255,255,0.4)'],
-                    });
-
                     return (
                         <Animated.View
                             key={i}
                             style={[
                                 styles.dot,
                                 {
-                                    width,
+                                    transform: [{ scale }],
                                     opacity,
-                                    backgroundColor,
                                 },
                             ]}
                         />
@@ -324,10 +318,11 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     dot: {
-        height: 8,
-        borderRadius: 4,
-        marginHorizontal: 4,
+        width: 10,
+        height: 10,
+        borderRadius: 5,
         backgroundColor: COLORS.white,
+        marginHorizontal: 5,
     },
     nextButton: {
         position: 'absolute',

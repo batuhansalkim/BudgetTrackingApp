@@ -10,6 +10,7 @@ import {
     Platform,
     ScrollView,
     StatusBar,
+    Image,
 } from 'react-native';
 import { COLORS, FONTS, SIZES } from '../../app/constants/theme';
 import { router } from 'expo-router';
@@ -22,33 +23,25 @@ import Animated, {
 
 const { width, height } = Dimensions.get('window');
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [focusedInput, setFocusedInput] = useState<string | null>(null);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const handleLogin = () => {
-        if (!email || !password) {
+    const handleRegister = () => {
+        if (!fullName || !email || !password || !confirmPassword) {
             setError('Lütfen tüm alanları doldurun');
             return;
         }
-
-        // Email formatı kontrolü
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            setError('Geçerli bir e-posta adresi giriniz');
+        if (password !== confirmPassword) {
+            setError('Şifreler eşleşmiyor');
             return;
         }
-
-        // Şifre uzunluğu kontrolü
-        if (password.length < 6) {
-            setError('Şifre en az 6 karakter olmalıdır');
-            return;
-        }
-
-        // Başarılı giriş durumunda ana sayfaya yönlendir
+        // TODO: Register işlemleri
         router.replace('/(tabs)/home');
     };
 
@@ -65,8 +58,8 @@ export default function LoginScreen() {
                     entering={FadeInDown.duration(1000).springify()}
                     style={styles.header}
                 >
-                    <Text style={styles.welcomeText}>Tekrar</Text>
-                    <Text style={styles.title}>Hoş Geldiniz</Text>
+                    <Text style={styles.welcomeText}>Merhaba</Text>
+                    <Text style={styles.title}>Kayıt Ol</Text>
                 </Animated.View>
             </LinearGradient>
 
@@ -84,9 +77,24 @@ export default function LoginScreen() {
                         entering={FadeInUp.duration(1000).springify()}
                         style={styles.formContainer}
                     >
-                        <Text style={styles.subtitle}>Hesabınıza giriş yapın</Text>
+                        <Text style={styles.subtitle}>Hesabınızı oluşturun</Text>
 
                         <View style={styles.inputWrapper}>
+                            <View style={styles.inputContainer}>
+                                <Ionicons 
+                                    name="person-outline" 
+                                    size={22} 
+                                    color={COLORS.gray} 
+                                />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Ad Soyad"
+                                    value={fullName}
+                                    onChangeText={text => setFullName(text)}
+                                    autoCapitalize="words"
+                                />
+                            </View>
+
                             <View style={styles.inputContainer}>
                                 <Ionicons 
                                     name="mail-outline" 
@@ -124,11 +132,29 @@ export default function LoginScreen() {
                                     />
                                 </TouchableOpacity>
                             </View>
-                        </View>
 
-                        <TouchableOpacity style={styles.forgotPassword}>
-                            <Text style={styles.forgotPasswordText}>Şifremi Unuttum</Text>
-                        </TouchableOpacity>
+                            <View style={styles.inputContainer}>
+                                <Ionicons 
+                                    name="lock-closed-outline" 
+                                    size={22} 
+                                    color={COLORS.gray} 
+                                />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Şifre Tekrar"
+                                    value={confirmPassword}
+                                    onChangeText={text => setConfirmPassword(text)}
+                                    secureTextEntry={!showConfirmPassword}
+                                />
+                                <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                                    <Ionicons 
+                                        name={showConfirmPassword ? "eye-outline" : "eye-off-outline"} 
+                                        size={22} 
+                                        color={COLORS.gray} 
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
 
                         {error ? (
                             <Animated.Text 
@@ -140,8 +166,8 @@ export default function LoginScreen() {
                         ) : null}
 
                         <TouchableOpacity 
-                            style={styles.loginButton} 
-                            onPress={handleLogin}
+                            style={styles.registerButton} 
+                            onPress={handleRegister}
                         >
                             <LinearGradient
                                 colors={[COLORS.primary, COLORS.secondary]}
@@ -149,38 +175,16 @@ export default function LoginScreen() {
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 0 }}
                             >
-                                <Text style={styles.buttonText}>Giriş Yap</Text>
+                                <Text style={styles.buttonText}>Kayıt Ol</Text>
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <View style={styles.dividerContainer}>
-                            <View style={styles.dividerLine} />
-                            <Text style={styles.dividerText}>veya</Text>
-                            <View style={styles.dividerLine} />
-                        </View>
-
                         <TouchableOpacity 
-                            style={styles.googleButton}
-                            onPress={() => {
-                                // Google sign-in logic will be implemented
-                                console.log('Google sign-in pressed');
-                            }}
+                            style={styles.loginButton}
+                            onPress={() => router.back()}
                         >
-                            <Ionicons 
-                                name="logo-google" 
-                                size={24} 
-                                color="#4285F4"
-                                style={styles.googleIcon}
-                            />
-                            <Text style={styles.googleButtonText}>Google ile devam et</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity 
-                            style={styles.registerButton}
-                            onPress={() => router.push('/(auth)/register')}
-                        >
-                            <Text style={styles.registerText}>
-                                Hesabınız yok mu? <Text style={styles.registerLink}>Kayıt Olun</Text>
+                            <Text style={styles.loginText}>
+                                Zaten hesabınız var mı? <Text style={styles.loginLink}>Giriş Yap</Text>
                             </Text>
                         </TouchableOpacity>
                     </Animated.View>
@@ -196,14 +200,14 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
     },
     topGradient: {
-        height: height * 0.3,
+        height: height * 0.25,
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
-        paddingTop: Platform.OS === 'ios' ? 60 : 40,
+        paddingTop: Platform.OS === 'ios' ? 45 : 25,
         paddingHorizontal: SIZES.padding,
     },
     header: {
-        marginTop: height * 0.05,
+        marginTop: height * 0.03,
     },
     welcomeText: {
         fontSize: SIZES.large,
@@ -229,7 +233,8 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         flexGrow: 1,
-        paddingTop: SIZES.padding * 2,
+        paddingTop: SIZES.padding * 1.5,
+        paddingBottom: SIZES.padding * 2,
     },
     subtitle: {
         fontSize: SIZES.large,
@@ -256,25 +261,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333',
     },
-    eyeIcon: {
-        padding: SIZES.base,
-    },
-    forgotPassword: {
-        alignSelf: 'flex-end',
-        marginBottom: SIZES.padding,
-    },
-    forgotPasswordText: {
-        color: COLORS.primary,
-        fontFamily: FONTS.medium,
-        fontSize: SIZES.font,
-    },
     error: {
         color: '#FF3B30',
         fontFamily: FONTS.regular,
         marginBottom: SIZES.medium,
         textAlign: 'center',
     },
-    loginButton: {
+    registerButton: {
         overflow: 'hidden',
         borderRadius: 12,
         marginTop: SIZES.medium,
@@ -288,59 +281,18 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.bold,
         fontSize: SIZES.large,
     },
-    registerButton: {
+    loginButton: {
         marginTop: SIZES.padding,
         alignItems: 'center',
+        marginBottom: SIZES.padding,
     },
-    registerText: {
+    loginText: {
         fontFamily: FONTS.regular,
         fontSize: SIZES.medium,
         color: COLORS.gray,
     },
-    registerLink: {
+    loginLink: {
         fontFamily: FONTS.bold,
         color: COLORS.primary,
-    },
-    dividerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: SIZES.padding,
-    },
-    dividerLine: {
-        flex: 1,
-        height: 1,
-        backgroundColor: COLORS.lightGray,
-    },
-    dividerText: {
-        marginHorizontal: SIZES.base,
-        color: COLORS.gray,
-        fontFamily: FONTS.regular,
-    },
-    googleButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 12,
-        padding: 16,
-        marginHorizontal: SIZES.padding,
-        borderWidth: 1,
-        borderColor: COLORS.lightGray,
-        elevation: 1,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 1,
-    },
-    googleIcon: {
-        marginRight: 12,
-    },
-    googleButtonText: {
-        color: COLORS.black,
-        fontFamily: FONTS.medium,
-        fontSize: SIZES.medium,
     },
 }); 
