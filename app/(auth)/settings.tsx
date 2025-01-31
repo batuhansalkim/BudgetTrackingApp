@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Platform,
+    Switch,
 } from 'react-native';
 import { Link, router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -43,6 +44,10 @@ export default function SettingsScreen() {
     const [selectedCurrency, setSelectedCurrency] = useState<string>('TRY');
     const [selectedLanguage, setSelectedLanguage] = useState<string>('tr');
     const { setLanguage, setCurrency } = useApp();
+    const [emailNotifications, setEmailNotifications] = useState(true);
+    const [budgetAlerts, setBudgetAlerts] = useState(true);
+    const [biometricLogin, setBiometricLogin] = useState(false);
+    const [autoBackup, setAutoBackup] = useState(true);
 
     const handleContinue = async () => {
         try {
@@ -54,79 +59,166 @@ export default function SettingsScreen() {
         }
     };
 
+    const settingsGroups = [
+        {
+            title: 'Güvenlik',
+            subtitle: 'Security',
+            icon: 'shield-checkmark-outline',
+            settings: [
+                {
+                    title: 'Biyometrik Giriş',
+                    subtitle: 'Biometric Login',
+                    value: biometricLogin,
+                    onValueChange: setBiometricLogin,
+                },
+                {
+                    title: 'Otomatik Yedekleme',
+                    subtitle: 'Auto Backup',
+                    value: autoBackup,
+                    onValueChange: setAutoBackup,
+                },
+            ],
+        },
+        {
+            title: 'Bildirimler',
+            subtitle: 'Notifications',
+            icon: 'notifications-outline',
+            settings: [
+                {
+                    title: 'E-posta Bildirimleri',
+                    subtitle: 'Email Notifications',
+                    value: emailNotifications,
+                    onValueChange: setEmailNotifications,
+                },
+                {
+                    title: 'Bütçe Uyarıları',
+                    subtitle: 'Budget Alerts',
+                    value: budgetAlerts,
+                    onValueChange: setBudgetAlerts,
+                },
+            ],
+        },
+    ];
+
+    const actionItems = [
+        {
+            title: 'Hesap Bilgileri',
+            subtitle: 'Account Information',
+            icon: 'person-outline',
+            action: () => {},
+        },
+        {
+            title: 'Gizlilik Politikası',
+            subtitle: 'Privacy Policy',
+            icon: 'lock-closed-outline',
+            action: () => {},
+        },
+        {
+            title: 'Yardım ve Destek',
+            subtitle: 'Help & Support',
+            icon: 'help-circle-outline',
+            action: () => {},
+        },
+        {
+            title: 'Hakkında',
+            subtitle: 'About',
+            icon: 'information-circle-outline',
+            action: () => {},
+        },
+    ];
+
     return (
         <View style={styles.container}>
             <LinearGradient
                 colors={[COLORS.primary, COLORS.secondary]}
-                style={styles.gradient}
+                style={styles.headerGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
             >
-                <Text style={styles.title}>Uygulama Ayarları</Text>
-                <Text style={styles.subtitle}>App Settings</Text>
-
-                <ScrollView style={styles.scrollView}>
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Para Birimi</Text>
-                        <Text style={styles.sectionSubtitle}>Currency</Text>
-                        <View style={styles.optionsContainer}>
-                            {currencies.map((currency) => (
-                                <TouchableOpacity
-                                    key={currency.code}
-                                    style={[
-                                        styles.option,
-                                        selectedCurrency === currency.code && styles.selectedOption,
-                                    ]}
-                                    onPress={() => setSelectedCurrency(currency.code)}
-                                >
-                                    <Text style={styles.optionSymbol}>{currency.symbol}</Text>
-                                    <Text style={styles.optionText}>{currency.name}</Text>
-                                    {selectedCurrency === currency.code && (
-                                        <Ionicons
-                                            name="checkmark-circle"
-                                            size={24}
-                                            color={COLORS.primary}
-                                            style={styles.checkIcon}
-                                        />
-                                    )}
-                                </TouchableOpacity>
-                            ))}
-                        </View>
-                    </View>
-
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Dil</Text>
-                        <Text style={styles.sectionSubtitle}>Language</Text>
-                        <View style={styles.optionsContainer}>
-                            {languages.map((language) => (
-                                <TouchableOpacity
-                                    key={language.code}
-                                    style={[
-                                        styles.option,
-                                        selectedLanguage === language.code && styles.selectedOption,
-                                    ]}
-                                    onPress={() => setSelectedLanguage(language.code)}
-                                >
-                                    <Text style={styles.optionText}>{language.localName}</Text>
-                                    <Text style={styles.optionSubtext}>{language.name}</Text>
-                                    {selectedLanguage === language.code && (
-                                        <Ionicons
-                                            name="checkmark-circle"
-                                            size={24}
-                                            color={COLORS.primary}
-                                            style={styles.checkIcon}
-                                        />
-                                    )}
-                                </TouchableOpacity>
-                            ))}
-                        </View>
-                    </View>
-                </ScrollView>
-
-                <TouchableOpacity style={styles.button} onPress={handleContinue}>
-                    <Text style={styles.buttonText}>Devam Et / Continue</Text>
-                </TouchableOpacity>
+                <Text style={styles.title}>Ayarlar</Text>
+                <Text style={styles.subtitle}>Settings</Text>
             </LinearGradient>
+
+            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+                <View style={styles.content}>
+                    {/* Ayar Grupları */}
+                    {settingsGroups.map((group, index) => (
+                        <View key={index} style={styles.card}>
+                            <View style={styles.cardHeader}>
+                                <Ionicons name={group.icon} size={24} color={COLORS.primary} />
+                                <View style={styles.cardTitleContainer}>
+                                    <Text style={styles.cardTitle}>{group.title}</Text>
+                                    <Text style={styles.cardSubtitle}>{group.subtitle}</Text>
+                                </View>
+                            </View>
+                            
+                            {group.settings.map((setting, settingIndex) => (
+                                <View 
+                                    key={settingIndex} 
+                                    style={[
+                                        styles.settingItem,
+                                        settingIndex < group.settings.length - 1 && styles.settingBorder
+                                    ]}
+                                >
+                                    <View style={styles.settingTextContainer}>
+                                        <Text style={styles.settingTitle}>{setting.title}</Text>
+                                        <Text style={styles.settingSubtitle}>{setting.subtitle}</Text>
+                                    </View>
+                                    <Switch
+                                        value={setting.value}
+                                        onValueChange={setting.onValueChange}
+                                        trackColor={{ false: COLORS.lightGray, true: COLORS.primary }}
+                                        thumbColor={COLORS.white}
+                                    />
+                                </View>
+                            ))}
+                        </View>
+                    ))}
+
+                    {/* Eylem Butonları */}
+                    <View style={styles.card}>
+                        {actionItems.map((item, index) => (
+                            <TouchableOpacity 
+                                key={index}
+                                style={[
+                                    styles.actionItem,
+                                    index < actionItems.length - 1 && styles.actionBorder
+                                ]}
+                                onPress={item.action}
+                            >
+                                <View style={styles.actionLeft}>
+                                    <Ionicons name={item.icon} size={24} color={COLORS.primary} />
+                                    <View style={styles.actionTextContainer}>
+                                        <Text style={styles.actionTitle}>{item.title}</Text>
+                                        <Text style={styles.actionSubtitle}>{item.subtitle}</Text>
+                                    </View>
+                                </View>
+                                <Ionicons name="chevron-forward" size={24} color={COLORS.gray} />
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+
+                    <TouchableOpacity style={styles.logoutButton}>
+                        <Ionicons name="log-out-outline" size={24} color={COLORS.error} />
+                        <Text style={styles.logoutText}>Çıkış Yap / Logout</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+
+            <TouchableOpacity 
+                style={styles.continueButton} 
+                onPress={handleContinue}
+            >
+                <LinearGradient
+                    colors={[COLORS.primary, COLORS.secondary]}
+                    style={styles.buttonGradient}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                >
+                    <Text style={styles.buttonText}>Devam Et / Continue</Text>
+                    <Ionicons name="arrow-forward" size={24} color={COLORS.white} />
+                </LinearGradient>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -134,96 +226,161 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: COLORS.white,
     },
-    gradient: {
-        flex: 1,
+    headerGradient: {
         paddingTop: Platform.OS === 'ios' ? 60 : 40,
+        paddingBottom: 20,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
     },
     title: {
         fontSize: SIZES.extraLarge,
         fontFamily: FONTS.bold,
         color: COLORS.white,
         textAlign: 'center',
-        marginBottom: 5,
     },
     subtitle: {
         fontSize: SIZES.large,
         fontFamily: FONTS.regular,
         color: COLORS.white,
         textAlign: 'center',
-        marginBottom: 30,
         opacity: 0.8,
     },
     scrollView: {
         flex: 1,
-        paddingHorizontal: SIZES.padding,
     },
-    section: {
-        marginBottom: 30,
-        backgroundColor: 'rgba(255,255,255,0.9)',
-        borderRadius: SIZES.radius,
+    content: {
         padding: SIZES.padding,
-        ...SHADOWS.light,
     },
-    sectionTitle: {
-        fontSize: SIZES.large,
-        fontFamily: FONTS.bold,
-        color: COLORS.primary,
-        marginBottom: 5,
-    },
-    sectionSubtitle: {
-        fontSize: SIZES.font,
-        fontFamily: FONTS.regular,
-        color: COLORS.gray,
-        marginBottom: 15,
-    },
-    optionsContainer: {
+    card: {
         backgroundColor: COLORS.white,
         borderRadius: SIZES.radius,
-        overflow: 'hidden',
+        marginBottom: 20,
+        ...Platform.select({
+            ios: {
+                shadowColor: COLORS.primary,
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
-    option: {
+    cardHeader: {
         flexDirection: 'row',
         alignItems: 'center',
         padding: SIZES.padding,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.lightGray,
     },
-    selectedOption: {
-        backgroundColor: 'rgba(33,150,243,0.1)',
+    cardTitleContainer: {
+        marginLeft: 10,
     },
-    optionSymbol: {
+    cardTitle: {
         fontSize: SIZES.large,
         fontFamily: FONTS.bold,
         color: COLORS.primary,
-        marginRight: 10,
-        width: 30,
     },
-    optionText: {
+    cardSubtitle: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.regular,
+        color: COLORS.gray,
+    },
+    settingItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: SIZES.padding,
+    },
+    settingBorder: {
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.lightGray,
+    },
+    settingTextContainer: {
+        flex: 1,
+    },
+    settingTitle: {
         fontSize: SIZES.font,
         fontFamily: FONTS.medium,
         color: COLORS.primary,
-        flex: 1,
     },
-    optionSubtext: {
+    settingSubtitle: {
         fontSize: SIZES.small,
         fontFamily: FONTS.regular,
         color: COLORS.gray,
-        marginLeft: 10,
     },
-    checkIcon: {
-        marginLeft: 10,
-    },
-    button: {
-        backgroundColor: 'rgba(255,255,255,0.2)',
+    actionItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         padding: SIZES.padding,
+    },
+    actionBorder: {
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.lightGray,
+    },
+    actionLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
+    actionTextContainer: {
+        marginLeft: 10,
+    },
+    actionTitle: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.medium,
+        color: COLORS.primary,
+    },
+    actionSubtitle: {
+        fontSize: SIZES.small,
+        fontFamily: FONTS.regular,
+        color: COLORS.gray,
+    },
+    logoutButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: SIZES.padding,
+        backgroundColor: COLORS.white,
+        borderRadius: SIZES.radius,
+        marginTop: 10,
+        ...Platform.select({
+            ios: {
+                shadowColor: COLORS.error,
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
+    },
+    logoutText: {
+        marginLeft: 10,
+        fontSize: SIZES.font,
+        fontFamily: FONTS.medium,
+        color: COLORS.error,
+    },
+    continueButton: {
         margin: SIZES.padding,
         borderRadius: SIZES.radius,
+        overflow: 'hidden',
+    },
+    buttonGradient: {
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
+        padding: SIZES.padding,
     },
     buttonText: {
         color: COLORS.white,
         fontSize: SIZES.large,
         fontFamily: FONTS.medium,
+        marginRight: 10,
     },
 }); 

@@ -16,32 +16,16 @@ export default function Layout() {
                     }}
                 />
                 <Stack.Screen
-                    name="(auth)/settings"
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-                <Stack.Screen
                     name="(auth)/setup"
                     options={{
+                        gestureEnabled: false,
                         headerShown: false,
                     }}
                 />
                 <Stack.Screen
-                    name="(auth)/login"
+                    name="/(tabs)/home"
                     options={{
-                        headerShown: false,
-                    }}
-                />
-                <Stack.Screen
-                    name="(auth)/register"
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-                <Stack.Screen
-                    name="(app)/home"
-                    options={{
+                        gestureEnabled: false,
                         headerShown: false,
                     }}
                 />

@@ -6,6 +6,8 @@ interface AppContextType {
     currency: string;
     setLanguage: (lang: string) => Promise<void>;
     setCurrency: (curr: string) => Promise<void>;
+    theme: 'light' | 'dark';
+    setTheme: (theme: 'light' | 'dark') => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -13,6 +15,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: React.ReactNode }) {
     const [language, setLanguageState] = useState<string>('tr');
     const [currency, setCurrencyState] = useState<string>('TRY');
+    const [theme, setThemeState] = useState<'light' | 'dark'>('light');
 
     useEffect(() => {
         // İlk yüklemede kayıtlı ayarları al
@@ -49,13 +52,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         }
     };
 
+    const setTheme = async (newTheme: 'light' | 'dark') => {
+        setThemeState(newTheme);
+    };
+
     return (
-        <AppContext.Provider value={{
-            language,
-            currency,
-            setLanguage,
-            setCurrency,
-        }}>
+        <AppContext.Provider
+            value={{
+                language,
+                currency,
+                setLanguage,
+                setCurrency,
+                theme,
+                setTheme,
+            }}
+        >
             {children}
         </AppContext.Provider>
     );

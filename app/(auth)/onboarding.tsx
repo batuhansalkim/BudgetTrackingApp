@@ -15,7 +15,7 @@ import {
     NativeScrollEvent,
     NativeSyntheticEvent,
 } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { COLORS, FONTS, SIZES } from '../../app/constants/theme';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -79,6 +79,7 @@ export default function OnboardingScreen() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const scrollX = useRef(new Animated.Value(0)).current;
     const slidesRef = useRef<FlatList<Slide>>(null);
+    const router = useRouter();
 
     const viewableItemsChanged = useRef(({ 
         viewableItems 
@@ -105,6 +106,10 @@ export default function OnboardingScreen() {
         [{ nativeEvent: { contentOffset: { x: scrollX } } }],
         { useNativeDriver: true }
     );
+
+    const handleStart = () => {
+        router.push('/setup');
+    };
 
     const renderItem: ListRenderItem<Slide> = ({ item, index }) => {
         return (
@@ -164,11 +169,9 @@ export default function OnboardingScreen() {
 
             <View style={styles.buttonContainer}>
                 {currentIndex === slides.length - 1 ? (
-                    <Link href="/settings" asChild>
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.buttonText}>Başla</Text>
-                        </TouchableOpacity>
-                    </Link>
+                    <TouchableOpacity style={styles.button} onPress={handleStart}>
+                        <Text style={styles.buttonText}>Başla</Text>
+                    </TouchableOpacity>
                 ) : (
                     <TouchableOpacity
                         style={styles.button}
