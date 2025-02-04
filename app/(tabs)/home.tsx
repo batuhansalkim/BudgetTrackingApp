@@ -11,8 +11,12 @@ import { COLORS, FONTS, SIZES } from '../../app/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import TransactionModal from '../components/TransactionModal';
+import { BarChart } from "react-native-chart-kit";
+import { Dimensions } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
+    const router = useRouter();
     const [showTransactionModal, setShowTransactionModal] = useState(false);
     const [transactionType, setTransactionType] = useState<'income' | 'expense'>('expense');
     const [showNotification, setShowNotification] = useState(false);
@@ -37,6 +41,62 @@ export default function HomeScreen() {
         }, 3000);
     };
 
+    // Sample recent transactions
+    const recentTransactions = [
+        {
+            id: '1',
+            type: 'expense',
+            amount: '150',
+            category: 'Market',
+            description: 'Haftalık market alışverişi',
+            date: new Date('2024-03-15'),
+            icon: 'cart-outline'
+        },
+        {
+            id: '2',
+            type: 'income',
+            amount: '5400',
+            category: 'Maaş',
+            description: 'Mart ayı maaş',
+            date: new Date('2024-03-14'),
+            icon: 'cash-outline'
+        },
+        {
+            id: '3',
+            type: 'expense',
+            amount: '60',
+            category: 'Ulaşım',
+            description: 'Akbil yükleme',
+            date: new Date('2024-03-13'),
+            icon: 'bus-outline'
+        }
+    ];
+
+    // Sample monthly data for chart
+    const monthlyData = {
+        labels: ["Oca", "Şub", "Mar", "Nis"],
+        datasets: [
+            {
+                data: [3200, 4500, 5400, 3800],
+                color: (opacity = 1) => COLORS.secondary,
+                label: 'Gelir'
+            },
+            {
+                data: [2100, 3200, 2800, 2400],
+                color: (opacity = 1) => COLORS.primary,
+                label: 'Gider'
+            }
+        ]
+    };
+
+    const handleSeeAllTransactions = () => {
+        router.push('/(tabs)/transactions');
+    };
+
+    const handleSeeAnalysisDetails = () => {
+        router.push('/analysis'); // Bu sayfayı oluşturmamız gerekecek
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -59,17 +119,17 @@ export default function HomeScreen() {
                     end={{ x: 1, y: 1 }}
                 >
                     <Text style={styles.balanceTitle}>Toplam Bakiye</Text>
-                    <Text style={styles.balanceAmount}>₺1.680.750</Text>
+                    <Text style={styles.balanceAmount}>₺100.980.750</Text>
                     <View style={styles.balanceRow}>
                         <View style={styles.balanceItem}>
                             <Ionicons name="arrow-up-circle-outline" size={24} color={COLORS.white} />
                             <Text style={styles.balanceLabel}>Gelir</Text>
-                            <Text style={styles.balanceValue}>₺680.225.685</Text>
+                            <Text style={styles.balanceValue}>₺480.225.685</Text>
                         </View>
                         <View style={styles.balanceItem}>
                             <Ionicons name="arrow-down-circle-outline" size={24} color={COLORS.white} />
                             <Text style={styles.balanceLabel}>Gider</Text>
-                            <Text style={styles.balanceValue}>₺2,450.00</Text>
+                            <Text style={styles.balanceValue}>₺60,450.00</Text>
                         </View>
                     </View>
                 </LinearGradient>
@@ -100,26 +160,72 @@ export default function HomeScreen() {
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
                         <Text style={styles.sectionTitle}>Son İşlemler</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={handleSeeAllTransactions}>
                             <Text style={styles.seeAll}>Tümünü Gör</Text>
                         </TouchableOpacity>
                     </View>
                     
-                    {/* Transaction List Placeholder */}
-                    <Text style={styles.placeholder}>İşlemler burada listelenecek</Text>
+                    {recentTransactions.map((transaction) => (
+                        <View key={transaction.id} style={styles.transactionItem}>
+                            <View style={[
+                                styles.transactionIcon,
+                                { backgroundColor: transaction.type === 'income' ? '#E8F5E9' : '#FFEBEE' }
+                            ]}>
+                                <Ionicons 
+                                    name={transaction.icon} 
+                                    size={24} 
+                                    color={transaction.type === 'income' ? COLORS.secondary : COLORS.primary} 
+                                />
+                            </View>
+                            <View style={styles.transactionInfo}>
+                                <Text style={styles.transactionCategory}>{transaction.category}</Text>
+                                <Text style={styles.transactionDescription}>{transaction.description}</Text>
+                                <Text style={styles.transactionDate}>
+                                    {transaction.date.toLocaleDateString('tr-TR')}
+                                </Text>
+                            </View>
+                            <Text style={[
+                                styles.transactionAmount,
+                                transaction.type === 'income' ? styles.incomeText : styles.expenseText
+                            ]}>
+                                {transaction.type === 'income' ? '+' : '-'}₺{transaction.amount}
+                            </Text>
+                        </View>
+                    ))}
                 </View>
 
                 {/* Monthly Analysis */}
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
                         <Text style={styles.sectionTitle}>Aylık Analiz</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={handleSeeAnalysisDetails}>
                             <Text style={styles.seeAll}>Detaylar</Text>
                         </TouchableOpacity>
                     </View>
                     
-                    {/* Analysis Chart Placeholder */}
-                    <Text style={styles.placeholder}>Grafik burada gösterilecek</Text>
+                    <BarChart
+                        data={monthlyData}
+                        width={Dimensions.get('window').width - (SIZES.padding * 2)}
+                        height={220}
+                        yAxisLabel="₺"
+                        chartConfig={{
+                            backgroundColor: COLORS.white,
+                            backgroundGradientFrom: COLORS.white,
+                            backgroundGradientTo: COLORS.white,
+                            decimalPlaces: 0,
+                            color: (opacity = 1) => COLORS.gray,
+                            style: {
+                                borderRadius: 16,
+                            },
+                        }}
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                        }}
+                        showBarTops={true}
+                        showValuesOnTopOfBars={true}
+                        withInnerLines={false}
+                    />
                 </View>
             </ScrollView>
 
@@ -260,12 +366,60 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.medium,
         color: COLORS.primary,
     },
-    placeholder: {
-        textAlign: 'center',
-        color: COLORS.gray,
+    transactionItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: SIZES.padding,
+        backgroundColor: COLORS.white,
+        borderRadius: SIZES.radius,
+        marginBottom: SIZES.base,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+    },
+    transactionIcon: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    transactionInfo: {
+        flex: 1,
+        marginLeft: SIZES.padding,
+    },
+    transactionCategory: {
+        fontFamily: FONTS.medium,
+        fontSize: SIZES.font,
+        color: COLORS.black,
+    },
+    transactionDescription: {
         fontFamily: FONTS.regular,
         fontSize: SIZES.font,
-        paddingVertical: SIZES.padding,
+        color: COLORS.gray,
+        marginTop: 2,
+    },
+    transactionDate: {
+        fontFamily: FONTS.regular,
+        fontSize: SIZES.small,
+        color: COLORS.gray,
+        marginTop: 2,
+    },
+    transactionAmount: {
+        fontFamily: FONTS.medium,
+        fontSize: SIZES.large,
+        marginLeft: SIZES.padding,
+    },
+    incomeText: {
+        color: COLORS.secondary,
+    },
+    expenseText: {
+        color: COLORS.primary,
     },
     notification: {
         position: 'absolute',

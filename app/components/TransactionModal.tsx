@@ -28,6 +28,33 @@ interface TransactionModalProps {
     };
 }
 
+const formatAmount = (value: string) => {
+    // Remove any non-digit characters except dots
+    const cleanValue = value.replace(/[^0-9.]/g, '');
+    
+    // Ensure only one decimal point
+    const parts = cleanValue.split('.');
+    if (parts.length > 2) {
+        return parts[0] + '.' + parts[1];
+    }
+    
+    // Format with thousand separators and max 2 decimal places
+    const number = parseFloat(cleanValue);
+    if (isNaN(number)) return '';
+    
+    const formatted = number.toLocaleString('tr-TR', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+    });
+    
+    // If user is typing decimal places, keep the decimal point
+    if (cleanValue.endsWith('.')) {
+        return formatted + '.';
+    }
+    
+    return formatted;
+};
+
 const TransactionModal: React.FC<TransactionModalProps> = ({
     visible,
     onClose,
@@ -73,6 +100,12 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
         if (selectedDate) {
             setDate(selectedDate);
         }
+    };
+
+    const handleAmountChange = (text: string) => {
+        // Remove existing formatting to get raw number
+        const rawValue = text.replace(/[^0-9.]/g, '');
+        setAmount(formatAmount(rawValue));
     };
 
     const handleSubmit = () => {
@@ -170,10 +203,10 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
                             <Text style={styles.sectionTitle}>Tutar</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="0.00"
-                                keyboardType="numeric"
+                                placeholder="Tutar"
+                                keyboardType="decimal-pad"
                                 value={amount}
-                                onChangeText={setAmount}
+                                onChangeText={handleAmountChange}
                             />
                         </View>
 
