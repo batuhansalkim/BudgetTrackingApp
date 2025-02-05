@@ -6,15 +6,18 @@ import { COLORS, FONTS, SIZES } from '../../constants/theme';
 const screenWidth = Dimensions.get('window').width;
 
 interface ExpenseChartProps {
-    data: {
-        category: string;
-        amount: number;
-        color: string;
-    }[];
+    data: any[];
     totalExpense: number;
+    showPercentages?: boolean;
+    enableAnimation?: boolean;
 }
 
-export default function ExpenseChart({ data, totalExpense }: ExpenseChartProps) {
+const ExpenseChart: React.FC<ExpenseChartProps> = ({
+    data,
+    totalExpense,
+    showPercentages = true,
+    enableAnimation = true,
+}) => {
     const chartConfig = {
         backgroundGradientFrom: COLORS.white,
         backgroundGradientTo: COLORS.white,
@@ -54,7 +57,7 @@ export default function ExpenseChart({ data, totalExpense }: ExpenseChartProps) 
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -87,4 +90,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: -SIZES.padding,
     },
-}); 
+});
+
+export default ExpenseChart; 

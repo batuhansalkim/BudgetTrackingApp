@@ -8,7 +8,7 @@ import {
     ScrollView,
     Modal,
 } from 'react-native';
-import { COLORS, FONTS, SIZES } from '../../app/constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import ExpenseChart from '../components/charts/ExpenseChart';
 import SpendingTrendChart from '../components/charts/SpendingTrendChart';
@@ -16,14 +16,47 @@ import CategoryComparisonChart from '../components/charts/CategoryComparisonChar
 
 const periods = ["Bu Ay", "Son 3 Ay", "Son 6 Ay", "Bu Yıl"];
 
-export default function AnalysisScreen() {
+// Yeni helper fonksiyonlar
+const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('tr-TR', {
+        style: 'currency',
+        currency: 'TRY',
+    }).format(amount);
+};
+
+const calculatePercentageChange = (current: number, previous: number) => {
+    const change = ((current - previous) / previous) * 100;
+    return change.toFixed(1);
+};
+
+// Bütçe durumu için interface
+interface BudgetStatus {
+    totalBudget: number;
+    currentSpending: number;
+    warningThreshold: number; // Örneğin %80
+    criticalThreshold: number; // Örneğin %90
+}
+
+const Analysis = () => {
     const [selectedPeriod, setSelectedPeriod] = useState('Bu Ay');
     const [showPeriodModal, setShowPeriodModal] = useState(false);
     const [selectedTab, setSelectedTab] = useState<'overview' | 'expenses' | 'income'>('overview');
 
-    // Sample data
+    // Daha gerçekçi veri örnekleri
     const expenseData = [
-        { category: 'Market', amount: 2500, color: '#FF6384', icon: 'cart-outline' },
+        { 
+            category: 'Market', 
+            amount: 2500, 
+            color: '#FF6384', 
+            icon: 'cart-outline',
+            previousAmount: 2100,
+            trend: 'up',
+            details: [
+                { title: 'En çok harcama', value: 'Migros (₺850)' },
+                { title: 'Ortalama işlem', value: '₺125' },
+                { title: 'İşlem sayısı', value: '20' }
+            ]
+        },
         { category: 'Ulaşım', amount: 1200, color: '#36A2EB', icon: 'bus-outline' },
         { category: 'Faturalar', amount: 1800, color: '#FFCE56', icon: 'receipt-outline' },
         { category: 'Yemek', amount: 900, color: '#4BC0C0', icon: 'restaurant-outline' },
@@ -50,34 +83,95 @@ export default function AnalysisScreen() {
         ],
     };
 
+    const renderDetailedExpenseCard = (item: any) => (
+        <View style={styles.detailedExpenseCard}>
+            <View style={styles.expenseHeader}>
+                <View style={styles.expenseHeaderLeft}>
+                    <Ionicons name={item.icon} size={24} color={item.color} />
+                    <Text style={styles.expenseCategory}>{item.category}</Text>
+                </View>
+                <Text style={styles.expenseAmount}>{formatCurrency(item.amount)}</Text>
+            </View>
+            
+            <View style={styles.expenseTrend}>
+                <Text style={styles.trendLabel}>Geçen Aya Göre:</Text>
+                <Text style={[
+                    styles.trendValue,
+                    { color: item.trend === 'up' ? COLORS.error : COLORS.success }
+                ]}>
+                    {calculatePercentageChange(item.amount, item.previousAmount)}%
+                    <Ionicons 
+                        name={item.trend === 'up' ? 'arrow-up' : 'arrow-down'} 
+                        size={16} 
+                    />
+                </Text>
+            </View>
+
+            <View style={styles.expenseDetails}>
+                {item.details.map((detail: any, index: number) => (
+                    <View key={index} style={styles.detailItem}>
+                        <Text style={styles.detailTitle}>{detail.title}</Text>
+                        <Text style={styles.detailValue}>{detail.value}</Text>
+                    </View>
+                ))}
+            </View>
+        </View>
+    );
+
+    const renderInsights = () => (
+        <View style={styles.insightsSection}>
+            <Text style={styles.sectionTitle}>Öne Çıkan Analizler</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <View style={styles.insightCard}>
+                    <Ionicons name="trending-up" size={24} color={COLORS.success} />
+                    <Text style={styles.insightTitle}>En Yüksek Artış</Text>
+                    <Text style={styles.insightCategory}>Market Harcamaları</Text>
+                    <Text style={styles.insightValue}>%19.2 ↑</Text>
+                    <Text style={styles.insightDescription}>
+                        Geçen aya göre market harcamalarınızda belirgin bir artış var.
+                    </Text>
+                </View>
+                
+                <View style={[styles.insightCard, { backgroundColor: COLORS.success + '15' }]}>
+                    <Ionicons name="trending-down" size={24} color={COLORS.success} />
+                    <Text style={styles.insightTitle}>Tasarruf</Text>
+                    <Text style={styles.insightCategory}>Faturalar</Text>
+                    <Text style={styles.insightValue}>₺245 ↓</Text>
+                    <Text style={styles.insightDescription}>
+                        Enerji tasarrufu önlemleriniz sayesinde fatura giderleriniz azaldı.
+                    </Text>
+                </View>
+            </ScrollView>
+        </View>
+    );
+
     const renderTabContent = () => {
         switch (selectedTab) {
             case 'overview':
                 return (
                     <>
-                        <View style={styles.summaryCard}>
-                            <Text style={styles.summaryTitle}>Genel Bakış</Text>
-                            <View style={styles.summaryRow}>
-                                <View style={styles.summaryItem}>
-                                    <Text style={styles.summaryLabel}>Toplam Gelir</Text>
-                                    <Text style={[styles.summaryValue, styles.incomeText]}>₺8,500</Text>
-                                    <Text style={[styles.summaryChange, styles.incomeText]}>+12%</Text>
-                                </View>
-                                <View style={styles.summaryItem}>
-                                    <Text style={styles.summaryLabel}>Toplam Gider</Text>
-                                    <Text style={[styles.summaryValue, styles.expenseText]}>₺7,900</Text>
-                                    <Text style={[styles.summaryChange, styles.expenseText]}>-8%</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <SpendingTrendChart data={trendData} title="Aylık Trend" />
+                        {renderInsights()}
+                        <SpendingTrendChart 
+                            data={trendData} 
+                            title="Aylık Trend"
+                            showLegend={true}
+                            enableGridLines={true}
+                        />
+                        {renderBudgetSection()}
                     </>
                 );
             case 'expenses':
                 return (
                     <>
-                        <ExpenseChart data={expenseData} totalExpense={7900} />
-                        <CategoryComparisonChart data={categoryData} />
+                        <ExpenseChart 
+                            data={expenseData} 
+                            totalExpense={7900}
+                            showPercentages={true}
+                            enableAnimation={true}
+                        />
+                        {expenseData.map((item, index) => 
+                            renderDetailedExpenseCard(item)
+                        )}
                     </>
                 );
             case 'income':
@@ -92,21 +186,63 @@ export default function AnalysisScreen() {
         }
     };
 
-    const renderBudgetSection = () => (
-        <View style={styles.budgetSection}>
-            <Text style={styles.sectionTitle}>Bütçe Durumu</Text>
-            <View style={styles.budgetProgressCard}>
-                <View style={styles.budgetHeader}>
-                    <Text style={styles.budgetCategory}>Aylık Bütçe</Text>
-                    <Text style={styles.budgetAmount}>₺7,900 / ₺10,000</Text>
+    const renderBudgetSection = () => {
+        const budget: BudgetStatus = {
+            totalBudget: 10000,
+            currentSpending: 7900,
+            warningThreshold: 80,
+            criticalThreshold: 90
+        };
+
+        const percentage = (budget.currentSpending / budget.totalBudget) * 100;
+        const remaining = budget.totalBudget - budget.currentSpending;
+        
+        // Bütçe durumuna göre renk belirleme
+        const getProgressColor = () => {
+            if (percentage >= budget.criticalThreshold) return COLORS.error;
+            if (percentage >= budget.warningThreshold) return COLORS.warning;
+            return COLORS.success;
+        };
+
+        return (
+            <View style={styles.budgetSection}>
+                <Text style={styles.sectionTitle}>Bütçe Durumu</Text>
+                <View style={styles.budgetProgressCard}>
+                    <View style={styles.budgetHeader}>
+                        <Text style={styles.budgetCategory}>Aylık Bütçe</Text>
+                        <Text style={styles.budgetAmount}>
+                            {formatCurrency(budget.currentSpending)} / {formatCurrency(budget.totalBudget)}
+                        </Text>
+                    </View>
+                    
+                    <View style={styles.progressBar}>
+                        <View 
+                            style={[
+                                styles.progressFill, 
+                                { 
+                                    width: `${percentage}%`,
+                                    backgroundColor: getProgressColor()
+                                }
+                            ]} 
+                        />
+                    </View>
+                    
+                    <View style={styles.budgetInfo}>
+                        <Text style={styles.budgetRemaining}>
+                            Kalan: {formatCurrency(remaining)}
+                        </Text>
+                        <Text style={[
+                            styles.budgetStatus,
+                            { color: getProgressColor() }
+                        ]}>
+                            {percentage >= budget.criticalThreshold ? '⚠️ Kritik Seviye' :
+                             percentage >= budget.warningThreshold ? '⚠️ Dikkat' : '✅ İyi Durumda'}
+                        </Text>
+                    </View>
                 </View>
-                <View style={styles.progressBar}>
-                    <View style={[styles.progressFill, { width: '79%' }]} />
-                </View>
-                <Text style={styles.budgetRemaining}>Kalan: ₺2,100</Text>
             </View>
-        </View>
-    );
+        );
+    };
 
     const renderComparison = () => (
         <View style={styles.comparisonSection}>
@@ -157,6 +293,11 @@ export default function AnalysisScreen() {
                 <Text style={styles.habitTitle}>En Çok Harcama Yapılan Günler</Text>
                 <View style={styles.habitItem}>
                     <Text style={styles.habitDay}>Cumartesi</Text>
+                </View>
+            </View>
+        </View>
+    );
+
     return (
         <SafeAreaView style={styles.container}>
             {/* Header */}
@@ -438,12 +579,13 @@ const styles = StyleSheet.create({
         height: 10,
         backgroundColor: COLORS.lightGray,
         borderRadius: 5,
-        marginBottom: SIZES.padding,
+        marginVertical: SIZES.padding,
+        overflow: 'hidden',
     },
     progressFill: {
         height: '100%',
-        backgroundColor: COLORS.primary,
         borderRadius: 5,
+        transition: 'width 0.5s ease-in-out',
     },
     budgetRemaining: {
         fontSize: SIZES.font,
@@ -505,4 +647,118 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.regular,
         color: COLORS.gray,
     },
-}); 
+    detailedExpenseCard: {
+        backgroundColor: COLORS.white,
+        borderRadius: SIZES.radius,
+        padding: SIZES.padding,
+        marginBottom: SIZES.padding,
+        elevation: 2,
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+    },
+    expenseHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: SIZES.base,
+    },
+    expenseHeaderLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: SIZES.base,
+    },
+    expenseCategory: {
+        fontSize: SIZES.medium,
+        fontFamily: FONTS.semiBold,
+        color: COLORS.black,
+    },
+    expenseAmount: {
+        fontSize: SIZES.large,
+        fontFamily: FONTS.bold,
+        color: COLORS.primary,
+    },
+    expenseTrend: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: SIZES.base,
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.lightGray,
+    },
+    trendLabel: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.medium,
+        color: COLORS.gray,
+    },
+    trendValue: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.semiBold,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    expenseDetails: {
+        marginTop: SIZES.padding,
+    },
+    detailItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: SIZES.base,
+    },
+    detailTitle: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.medium,
+        color: COLORS.gray,
+    },
+    detailValue: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.semiBold,
+        color: COLORS.black,
+    },
+    insightsSection: {
+        marginBottom: SIZES.padding * 2,
+    },
+    insightCard: {
+        width: 280,
+        backgroundColor: COLORS.primary + '15',
+        borderRadius: SIZES.radius,
+        padding: SIZES.padding,
+        marginRight: SIZES.padding,
+    },
+    insightTitle: {
+        fontSize: SIZES.medium,
+        fontFamily: FONTS.semiBold,
+        color: COLORS.black,
+        marginTop: SIZES.base,
+    },
+    insightCategory: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.medium,
+        color: COLORS.gray,
+        marginTop: 2,
+    },
+    insightValue: {
+        fontSize: SIZES.large,
+        fontFamily: FONTS.bold,
+        color: COLORS.primary,
+        marginVertical: SIZES.base,
+    },
+    insightDescription: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.regular,
+        color: COLORS.gray,
+        lineHeight: 20,
+    },
+    budgetInfo: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    budgetStatus: {
+        fontSize: SIZES.font,
+        fontFamily: FONTS.medium,
+    },
+});
+
+export default Analysis; 

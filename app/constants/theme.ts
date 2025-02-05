@@ -28,6 +28,7 @@ export const SIZES = {
 export const FONTS = {
     regular: "System",
     medium: "System",
+    semiBold: "System",
     bold: "System-Bold",
     light: "System",
 };
@@ -63,4 +64,6 @@ export const SHADOWS = {
         shadowRadius: 9.11,
         elevation: 14,
     },
-}; 
+};
+
+export default { COLORS, SIZES, FONTS, SHADOWS }; 
