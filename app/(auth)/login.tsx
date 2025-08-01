@@ -10,6 +10,7 @@ import {
     Platform,
     ScrollView,
     StatusBar,
+    Alert,
 } from 'react-native';
 import { COLORS, FONTS, SIZES } from '../../app/constants/theme';
 import { router } from 'expo-router';
@@ -19,6 +20,7 @@ import Animated, {
     FadeInDown, 
     FadeInUp,
 } from 'react-native-reanimated';
+import { useApp } from '../contexts/AppContext';
 
 const { width, height } = Dimensions.get('window');
 

@@ -1,36 +1,60 @@
 - *Kullanıcı Karşılaştırması:* Anonim olarak benzer gelir grubundaki kullanıcılarla karşılaştırma.
 - *Tasarruf Yarışmaları:* Kullanıcıların tasarruf hedeflerine ulaşmak için yarışabileceği platformlar.
 - *Ortak Bütçe Yönetimi:* Aile üyeleri veya arkadaşlarla birlikte bütçe oluşturma.
+- *Topluluk Önerileri:* Kullanıcıların birbirine tasarruf önerileri paylaşması.
+- *Anonim İstatistikler:* Kişisel verileri gizli tutarak topluluk istatistikleri.
 
-### 5. *Akıllı OCR Entegrasyonu*
+### 5. *Akıllı OCR ve Otomatik Kategorizasyon*
 - *Fiş Taraması:* Fişleri tarayarak giderlerin otomatik olarak eklenmesi.
 - *E-Fatura Entegrasyonu:* E-faturalardan giderlerin otomatik olarak alınması.
 - *Garanti Süresi Takibi:* Satın alınan ürünlerin garanti sürelerinin izlenmesi.
+- *Akıllı Kategorizasyon:* AI ile işlemleri otomatik kategorilere ayırma.
+- *QR Kod Okuma:* Fatura ve ürün QR kodlarını okuma.
+- *Sesli Komut:* "Market alışverişi 150 lira" gibi sesli işlem ekleme.
 
 ### 6. *Finansal Eğitim Gamification*
 - *Eğitici Mini Oyunlar:* Finansal becerileri geliştiren oyunlar.
 - *Rozet ve Ödül Sistemi:* Tasarruf hedeflerine ulaşıldığında ödül kazanımı.
 - *Interaktif Eğitim Modülleri:* Kullanıcıların finansal bilgi düzeylerini artıran modüller.
+- *Seviye Sistemi:* Finansal bilgi seviyesini artıran sistem.
+- *Başarı Rozetleri:* Farklı başarıları ödüllendiren rozetler.
+- *Finansal Quizler:* Bilgi seviyesini test eden interaktif quizler.
 
 ### 7. *Gelişmiş Analitik ve Tahminleme*
 - *Mevsimsel Harcama Analizi:* Belirli dönemlerdeki harcamaların karşılaştırılması.
 - *"What-if" Analizleri:* Alternatif senaryoların oluşturulması.
 - *Yatırım Fırsatları Önerileri:* Kullanıcının tasarruflarını değerlendirebileceği yatırım önerileri.
+- *Finansal Sağlık Skoru:* Kullanıcının finansal durumunu 0-100 arası puanlama.
+- *Gelecek Tahminleme:* AI ile gelecek harcamaları ve gelirleri tahmin etme.
+- *Risk Analizi:* Yatırım risk toleransına göre öneriler.
+- *Portföy Takibi:* Mevcut yatırımları takip etme.
 
 ### 8. *Yerel Entegrasyonlar*
 - *Türkiye'deki Bankalarla Entegrasyon:* Banka API'leri aracılığıyla otomatik işlem takibi.
 - *E-Devlet Entegrasyonu:* Vergi ve diğer yasal işlemler için hatırlatıcılar.
 - *Fatura Ödeme Sistemleri:* Yerel fatura ödeme hizmetleriyle entegrasyon.
+- *Kredi Kartı Takibi:* Kredi kartı harcamalarının otomatik kategorizasyonu.
+- *SGK Ödemeleri:* İşveren/çalışan ödemelerini takip etme.
+- *Vergi Hatırlatıcıları:* Vergi ödeme tarihlerini takip etme.
+- *Piyasa Verileri:* Döviz, altın, hisse senedi verilerini entegre etme.
 
 ### 9. *Akıllı Bütçe Optimizasyonu*
 - *Otomatik Bütçe Önerileri:* Yapay zeka tarafından önerilen bütçe planları.
 - *Dinamik Kategori Ayarlaması:* Kullanıcının değişen ihtiyaçlarına göre ayarlanan kategoriler.
 - *Yedek Fon Önerileri:* Beklenmeyen giderler için tasarruf önerileri.
+- *Proaktif Uyarılar:* Bütçe aşımından önce uyarılar.
+- *Tasarruf Fırsatları:* İndirim ve kampanya bildirimleri.
+- *Gelir Artışı Hedefleri:* Gelir artırma stratejileri.
+- *Otomatik Limit Ayarlaması:* Harcama alışkanlıklarına göre limit önerileri.
 
 ### 10. *Yaşam Tarzı Entegrasyonu*
 - *Sağlık Uygulamaları ile Entegrasyon:* Yemek siparişleri ve market alışverişlerini takip ederek bütçeyi optimize etme.
 - *Takvim Entegrasyonu:* Gelecek harcamaların planlanması için etkinlik takvimi ile entegrasyon.
 - *Konum Bazlı Öneriler:* Kullanıcının bulunduğu konuma göre tasarruf önerileri.
+- *Yakındaki İndirimler:* Konuma göre tasarruf önerileri.
+- *Market Fiyat Karşılaştırması:* Yakındaki marketlerin fiyatlarını karşılaştırma.
+- *Toplu Taşıma Optimizasyonu:* Ulaşım maliyetlerini optimize etme.
+- *Spor ve Sağlık Takibi:* Spor salonu, ekipman harcamalarını takip etme.
 
 ---
 
@@ -53,6 +77,14 @@
 ### Daha Bütünleşik
 - Sağlık uygulamaları ve takvim gibi yaşam tarzı entegrasyonları.
 
+### Daha Güvenli
+- Biyometrik kimlik doğrulama ve çok faktörlü güvenlik.
+- Şifreli veri saklama ve GDPR uyumluluğu.
+
+### Daha Sesli ve Görsel
+- Sesli asistan ve komut sistemi.
+- QR kod entegrasyonu ve görsel işlem ekleme.
+
 ---
 
 ## Teknoloji Yığını (Tech Stack)
@@ -62,6 +94,55 @@
 - *Yapay Zeka:* TensorFlow.js / Python (ML modelleri için)
 - *API Entegrasyonu:* Türkiye bankaları ve e-devlet API'leri
 - *Diğer:* Firebase (push bildirimler), Redux (durum yönetimi)
+- *OCR:* React Native Vision Camera
+- *Sesli Komutlar:* React Native Voice
+- *Biyometrik:* React Native Biometrics
+- *Konum:* React Native Geolocation
+- *QR Kod:* React Native QR Code Scanner
+
+---
+
+## Yeni Eklenen Farklılaştırıcı Özellikler
+
+### 11. *Gelişmiş Güvenlik Sistemi*
+- *Biyometrik Kimlik Doğrulama:* Parmak izi/Face ID ile güvenli giriş
+- *Çok Faktörlü Doğrulama:* SMS/Email + biyometrik kombinasyonu
+- *Şifreli Veri Saklama:* Hassas finansal verilerin AES-256 şifreleme ile korunması
+- *Veri Gizliliği:* Anonim analiz ile kişisel verileri gizli tutma
+- *GDPR Uyumluluğu:* Avrupa veri koruma standartlarına uyum
+- *Güvenli Veri Yedekleme:* Bulut tabanlı şifreli yedekleme
+
+### 12. *Sesli ve Görsel Asistan*
+- *Sesli İşlem Ekleme:* "Market alışverişi 150 lira" komutu
+- *Sesli Sorgulama:* "Bu ay ne kadar harcadım?" sorusu
+- *Sesli Öneriler:* Sesli tasarruf önerileri
+- *QR Kod Fatura Okuma:* Fatura QR kodlarını otomatik okuma
+- *Hızlı QR Ödeme:* QR kod ile hızlı ödeme sistemi
+- *Ürün QR Takibi:* QR kod ile ürün fiyat karşılaştırması
+
+### 13. *Akıllı Bildirim Sistemi*
+- *Proaktif Bütçe Uyarıları:* Bütçe aşımından önce uyarılar
+- *Tasarruf Fırsatı Bildirimleri:* İndirim ve kampanya bildirimleri
+- *Hedef Hatırlatmaları:* Kişiselleştirilmiş hedef hatırlatmaları
+- *Fatura Ödeme Hatırlatıcıları:* Yaklaşan ödemeler için uyarılar
+- *Garanti Süresi Uyarıları:* Garanti süresi dolmak üzere olan ürünler
+- *Yatırım Fırsatı Bildirimleri:* Piyasa fırsatları hakkında bilgilendirme
+
+### 14. *Konum Bazlı Akıllı Özellikler*
+- *Yakındaki İndirimler:* Konuma göre tasarruf önerileri
+- *Market Fiyat Karşılaştırması:* Yakındaki marketlerin fiyatlarını karşılaştırma
+- *Toplu Taşıma Optimizasyonu:* Ulaşım maliyetlerini optimize etme
+- *Yakındaki ATM'ler:* En yakın ATM'leri gösterme
+- *Konum Bazlı Harcama Analizi:* Bölgesel harcama alışkanlıkları
+- *Seyahat Bütçesi Optimizasyonu:* Seyahat ederken bütçe yönetimi
+
+### 15. *Gelişmiş Sosyal Özellikler*
+- *Aile/Grup Bütçe Yönetimi:* Ortak hesaplar ve bütçe paylaşımı
+- *Tasarruf Yarışmaları:* Aile/arkadaş grupları arası yarışmalar
+- *Topluluk Önerileri:* Kullanıcıların birbirine tasarruf önerileri
+- *Anonim Karşılaştırma:* Benzer gelir grubundaki kullanıcılarla karşılaştırma
+- *Finansal Mentorluk:* Deneyimli kullanıcıların yeni kullanıcılara rehberlik etmesi
+- *Sosyal Tasarruf Hedefleri:* Grup halinde tasarruf hedefleri
 
 ---
 
@@ -208,4 +289,53 @@ React Native Vision Camera (OCR)
 React Native Voice (sesli komutlar)
 
 
+eksik kısımlar:
+❌ Eksik Özellikler (MVP için Kritik)
+1. Veri Kalıcılığı
+❌ Gerçek Veri Saklama: İşlemler ve hedefler sadece memory'de
+❌ Veri Senkronizasyonu: Sayfalar arası veri paylaşımı yok
+❌ Veri Yedekleme: Kullanıcı verilerinin kalıcı saklanması yok
+2. Temel İş Mantığı
+❌ Bütçe Hesaplamaları: Toplam bakiye, gelir/gider hesaplamaları
+❌ Kategori Yönetimi: Kategori ekleme/düzenleme
+❌ Tarih Filtreleme: Gerçek tarih bazlı filtreleme
+❌ Arama Fonksiyonu: İşlem arama özelliği
+3. Kullanıcı Deneyimi
+❌ Form Validasyonu: Giriş alanlarında doğrulama
+❌ Hata Yönetimi: Hata durumlarının ele alınması
+❌ Loading States: Yükleme durumları
+❌ Offline Support: İnternet bağlantısı olmadan çalışma
 
+�� MVP için Gerekli Minimum Özellikler
+1. Veri Kalıcılığı (Kritik)
+2. Bütçe Hesaplamaları (Kritik)
+3. Kategori Yönetimi (Önemli)
+Kategori ekleme/düzenleme modalı
+Varsayılan kategoriler
+Kategori bazlı filtreleme
+4. Form Validasyonu (Önemli)
+Boş alan kontrolü
+Tutar formatı kontrolü
+Tarih kontrolü
+�� MVP Sonrası Geliştirme Öncelikleri
+Faz 1: Temel İyileştirmeler
+Veri Kalıcılığı: AsyncStorage entegrasyonu
+Bütçe Hesaplamaları: Gerçek hesaplamalar
+Kategori Yönetimi: Kategori CRUD işlemleri
+Form Validasyonu: Giriş doğrulama
+Faz 2: Gelişmiş Özellikler
+Arama ve Filtreleme: Gelişmiş arama
+İstatistikler: Detaylı analiz
+Bildirimler: Push notification
+Tema Desteği: Dark/Light mode
+Faz 3: Farklılaştırıcı Özellikler
+OCR Entegrasyonu: Fiş tarama
+Sesli Komutlar: Sesli işlem ekleme
+Sosyal Özellikler: Aile/grup bütçesi
+AI Önerileri: Akıllı tasarruf önerileri
+📋 MVP için Acil Yapılması Gerekenler
+Veri Kalıcılığı: İşlemler ve hedeflerin AsyncStorage'da saklanması
+Context Güncelleme: AppContext'e transactions ve goals state'leri eklenmesi
+Bütçe Hesaplamaları: Gerçek gelir/gider hesaplamaları
+Form Validasyonu: Giriş alanlarında doğrulama
+Hata Yönetimi: Try-catch blokları ve kullanıcı bildirimleri
